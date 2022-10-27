@@ -62,19 +62,20 @@ posts.forEach(post => {
 container.innerHTML += generatePost(post);
 })
 
+
+
 function generatePost(post) {
     const {id, content, media, author, likes, created} = post;
     let icon;
     if (author.image == null) {
         icon = `
-        <span class="profile-initials">SD</span>
+        <span class="profile-initials">${initialsGenerator(author.name)}</span>
         `;
     } else {
         icon = `
         <img class="profile-pic" src="${author.image}" alt="${author.name}">
         `;
     }
-    
     return `
     <div class="post">
     <div class="post__header">
@@ -110,5 +111,16 @@ function generatePost(post) {
 }
 
 function formatDate(date) {
-    return date.split("-").reverse().join("-")
+    return date.split("-").reverse()
 }
+
+function initialsGenerator(string) {
+    const arrayString = string.split(" ")
+    let output = "";
+    for (i in arrayString) {
+         output += arrayString[i].charAt(0).toUpperCase()
+    }
+    return output;
+ }
+
+ 
