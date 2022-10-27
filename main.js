@@ -84,7 +84,7 @@ function generatePost(post) {
             </div>
             <div class="post-meta__data">
                 <div class="post-meta__author">${author.name}</div>
-                <div class="post-meta__time">${created}</div>
+                <div class="post-meta__time">${formatDate(created)}</div>
             </div>                    
         </div>
     </div>
@@ -107,4 +107,8 @@ function generatePost(post) {
     </div>            
 </div>
     `;
+}
+
+function formatDate(date) {
+    return date.split("-").reverse().join("-")
 }
