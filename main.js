@@ -57,7 +57,7 @@ const posts = [
 ];
 
 const container = document.getElementById("container");
-let isLiked = false;
+let likedPosts = [];
 
 posts.forEach(post => {
 container.innerHTML += generatePost(post);
@@ -123,20 +123,17 @@ function initialsGenerator(string) {
  }
 
 function clickPost(element, id) {
-    if (isLiked) {
+    if (likedPosts.includes(id)) {
         element.classList.remove("like-button--liked");
         posts[id - 1].likes--;
+        let index = likedPosts.indexOf(id);
+        likedPosts.splice(index, 1);
     } else {
         element.classList.add("like-button--liked");
         posts[id - 1].likes++;
+        likedPosts.push(id);
     }
-    isLiked = !isLiked;
     const likeCounter = posts[id - 1].likes;
     document.getElementById(`like-counter-${id}`).innerText = likeCounter;
 }
-
-
-
-
-
  
