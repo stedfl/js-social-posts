@@ -111,13 +111,13 @@ function generatePost(post) {
 }
 
 function formatDate(date) {
-    return date.split("-").reverse()
+    return date.split("-").reverse().join("-");
 }
 
 function initialsGenerator(string) {
-    const arrayString = string.split(" ")
+    const arrayString = string.split(" ");
     let output = "";
-    for (i in arrayString) {
+    for (let i in arrayString) {
          output += arrayString[i].charAt(0).toUpperCase()
     }
     return output;
