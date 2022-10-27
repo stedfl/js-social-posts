@@ -116,8 +116,8 @@ function formatDate(date) {
 function initialsGenerator(string) {
     const arrayString = string.split(" ");
     let output = "";
-    for (let i in arrayString) {
-         output += arrayString[i].charAt(0).toUpperCase()
+    for (let word of arrayString) {
+         output += word.charAt(0).toUpperCase()
     }
     return output;
  }
