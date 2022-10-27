@@ -57,19 +57,18 @@ const posts = [
 ];
 
 const container = document.getElementById("container");
+let isLiked = false;
 
 posts.forEach(post => {
 container.innerHTML += generatePost(post);
 })
-
-
 
 function generatePost(post) {
     const {id, content, media, author, likes, created} = post;
     let icon;
     if (author.image == null) {
         icon = `
-        <span class="profile-initials">${initialsGenerator(author.name)}</span>
+        <span class="profile-pic-default">${initialsGenerator(author.name)}</span>
         `;
     } else {
         icon = `
@@ -96,13 +95,13 @@ function generatePost(post) {
     <div class="post__footer">
         <div class="likes js-likes">
             <div class="likes__cta">
-                <a class="like-button  js-like-button" href="#" data-postid="1">
+                <a class="like-button  js-like-button" onclick="clickPost(this, ${id})" href="#none" data-postid="1">
                     <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                     <span class="like-button__label">Mi Piace</span>
                 </a>
             </div>
             <div class="likes__counter">
-                Piace a <b id="like-counter-1" class="js-likes-counter">${likes}</b> persone
+                Piace a <b id="like-counter-${id}" class="js-likes-counter">${likes}</b> persone
             </div>
         </div> 
     </div>            
@@ -122,5 +121,22 @@ function initialsGenerator(string) {
     }
     return output;
  }
+
+function clickPost(element, id) {
+    if (isLiked) {
+        element.classList.remove("like-button--liked");
+        posts[id - 1].likes--;
+    } else {
+        element.classList.add("like-button--liked");
+        posts[id - 1].likes++;
+    }
+    isLiked = !isLiked;
+    const likeCounter = posts[id - 1].likes;
+    document.getElementById(`like-counter-${id}`).innerText = likeCounter;
+}
+
+
+
+
 
  
